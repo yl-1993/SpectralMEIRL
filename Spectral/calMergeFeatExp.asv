@@ -1,0 +1,14 @@
+function [mFeatExp] = calMergeFeatExp(trajFeature, belongTo, nClusters)
+    nTrajs = size(belongTo,2);
+    nFeatures = size(trajFeature,1);
+    mFeatExp = zeros(nClusters, nFeatures);
+    for i = 1:nClusters
+        mergeArr = (belongTo == nClusters);
+        for j = 1:nTrajs
+            if mergeArr(j) == 1
+                mFeatExp(i) = mFeatExp(i) + trajFeature(j);
+            end
+        end
+        mFeatExp(i) = trajReward(i)/nnz(mergeArr);
+    end
+end
