@@ -1,8 +1,8 @@
-function trajInfo = calSVD(TF)
+function trajInfo = calSVD(featExp)
 %
 % Compute Singular Value Decomposition for trajectory*feature matrix.
 %
-[u,singular,v] = svd(TF.featExp);
+[u,singular,v] = svd(featExp);
 trajInfo.u = u;
 trajInfo.singular = singular;
 trajInfo.v = v;

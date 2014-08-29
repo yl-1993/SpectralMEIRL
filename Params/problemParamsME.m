@@ -5,7 +5,7 @@ problem.iters     = 1:1;
 problem.discount  = 0.9;
 problem.nExps     = length(problem.iters);
 problem.nExperts  = 3;    % # of experts
-problem.nTrajs    = 5;    % # of trajectories
+problem.nTrajs    = 4;    % # of trajectories
 problem.nSteps    = 40;   % # of steps in each trajectory
 problem.initSeed  = 1;    % initial random seed
 

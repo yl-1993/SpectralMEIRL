@@ -21,7 +21,7 @@ alg.priorType = 'Uniform';
 % alg.priorType = 'NG';
 alg.priorType = 'Uniform';
 
-%alg.name = 'SPECTRAL_IRL';
+alg.name = 'SPECTRAL_IRL';
 
 configPath(alg.name, true);
 problem = problemParamsME(probName);

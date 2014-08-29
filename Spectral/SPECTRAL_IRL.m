@@ -8,15 +8,13 @@ nTrajs = size(trajs, 1);
 sol.weight   = [];
 
 TF = calBuildTF(trajs, mdp);
-trajInfo = calSVD(TF);
+trajInfo = calSVD(TF.featExp);
 %wL = trajInfo.v(1,:)'
 
 %TODO: cluster using TF*v
-sol.u = trajInfo.u;
-sol.singular = trajInfo.singular;
-sol.v = trajInfo.v;
 %TF.featExp*trajInfo.v
-[sol.belongTo, nClusters] = calCluster(trajInfo.u,0.08)
+[sol.belongTo, nClusters] = calCluster(trajInfo.u,0.08);
+sol.nClusters = nClusters;
 % 
 % nClusters = 10;
 % clusterId  =[];
@@ -29,6 +27,8 @@ sol.v = trajInfo.v;
 
 % reward function for each cluster
 mFeatExp = calMergeFeatExp(TF.featExp,sol.belongTo, nClusters);
+sol.mFeatExp = mFeatExp;
+% prior matrix
 priorMatrix = eye(nClusters);
 p1 = 1;
 p2 = (1-p1)/(nClusters-1);
