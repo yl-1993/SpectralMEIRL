@@ -1,4 +1,5 @@
 This package contains the algorithms of IRL when the behavior data is provided by multiple experts. 
+The experiments are conducted in gridworld and highway problem.
 
 - The Spectral algorithms are still under test.
 - The DPM algorithms are described in [ChoiKim.12].
@@ -8,6 +9,7 @@ This package contains the algorithms of IRL when the behavior data is provided b
 This package was built with Matlab R2013a.
 
 # Package overview
+- Spectral: merge the feature expectation based on SVD to build TF matrix and build cluster by reward matrix using the idea of pseudo inverse.
 - BIRL: Finding a maximum-a-posterior (MAP) estimate in Bayesian framework for IRL [ChoiKim.11].
 - DPM-BIRL: Extending BIRL with Dirichlet process mixture model to address IRL problems for multiple experts [ChoiKim.12].
 - EM_IRL: Using expectation-maximization method to address IRL problems for multiple experts [BabesETAL.11].

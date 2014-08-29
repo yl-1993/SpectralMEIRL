@@ -5,13 +5,13 @@ clear all;
 LASTN = maxNumCompThreads(1);
 
 probName = 'gridworld';
-%probName = 'highway3';
+probName = 'highway3';
 
 alg.name    = 'Ind_BIRL';
 alg.llhType   = 'BIRL';
 alg.priorType = 'Uniform';
 
-alg.name    = 'EM_IRL';
+%alg.name    = 'EM_IRL';
 alg.nClust  = 1;
 alg.llhType   = 'MLIRL';
 alg.priorType = 'Uniform';

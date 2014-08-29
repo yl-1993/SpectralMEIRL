@@ -15,6 +15,17 @@ end
 trajInfo = calSVD(newTF);
 % get the distance of new traj to every clusters
 dist = calDisToCluster(trajInfo.u);
+
+% no mix
+% maxe = max(dist);
+% for i=1:size(dist,2)
+%     if dist(i) == maxe
+%         dist(i) = 1;
+%     else
+%         dist(i) = 0;
+%     end
+% end
+
 % get a mix reward function
 wL = sol.weight*(dist./sum(dist));
 

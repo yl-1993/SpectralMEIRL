@@ -8,8 +8,8 @@ end
 RandStream.setGlobalStream(RandStream.create('mrg32k3a', ...
     'NumStreams', 1, 'Seed', seed));
 if strcmp(problem.name, 'highway3')
-    %mdp = highway3(discount);
-    load('./MDP/highway3');
+    mdp = highway3(discount);
+    %load('./MDP/highway3');
     mdp.discount = discount;
     
 elseif strcmp(problem.name, 'gridworld')
