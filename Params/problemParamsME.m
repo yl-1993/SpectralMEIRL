@@ -1,12 +1,12 @@
 function problem = problemParamsME(name)
 
 problem.name      = name;
-problem.iters     = 1:1;
+problem.iters     = 1:20;
 problem.discount  = 0.9;
 problem.nExps     = length(problem.iters);
 problem.nExperts  = 3;    % # of experts
 problem.nTrajs    = 4;    % # of trajectories
-problem.nSteps    = 40;   % # of steps in each trajectory
+problem.nSteps    = 100;   % # of steps in each trajectory
 problem.initSeed  = 1;    % initial random seed
 
 if strcmp(name, 'gridworld')
@@ -22,5 +22,5 @@ elseif strcmp(name, 'highway3')
 end
 
 problem.newExpertProb = 0.0;
-problem.newExps       = 20;
+problem.newExps       = 30;
 problem.newTrajSteps  = problem.nSteps;

@@ -1,11 +1,11 @@
 This package contains the algorithms of IRL when the behavior data is provided by multiple experts. 
 
-The Spectral algorithms are still under test.
-The DPM algorithms are described in [ChoiKim.12].
-The EM algorithms are described in [BabesETAL.11].
+- The Spectral algorithms are still under test.
+- The DPM algorithms are described in [ChoiKim.12].
+- The EM algorithms are described in [BabesETAL.11].
 
 # Requirement
-This package was built with Matlab2010a.
+This package was built with Matlab R2013a.
 
 # Package overview
 - BIRL: Finding a maximum-a-posterior (MAP) estimate in Bayesian framework for IRL [ChoiKim.11].
