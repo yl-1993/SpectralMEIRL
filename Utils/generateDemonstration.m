@@ -52,12 +52,20 @@ function [trajs, policy] = generateTrajectory(mdp, problem)
 % compute the optimal policy
 fprintf('  Policy iteration : ');
 [policy, value] = policyIteration(mdp);
-fprintf('%.4f\n', full(mdp.start'*value));
+optValue = full(mdp.start'*value);
+fprintf('%.4f\n', optValue);
 
-% Sample trajectories
+% Sample trajectories (make sure sampling is good)
+meanThreshold = 1;
+varThreshold = 1;
 fprintf('  Sample %d trajectories : ', problem.nTrajs);
-[trajs, trajVmean, trajVvar] = sampleTrajectories(problem.nTrajs, ...
-    problem.nSteps, policy, mdp);
+while 1
+    [trajs, trajVmean, trajVvar] = sampleTrajectories(problem.nTrajs, ...
+        problem.nSteps, policy, mdp);
+    if abs(optValue - trajVmean) < meanThreshold && trajVvar < varThreshold
+        break;
+    end
+end
 fprintf('%.4f (%.4f)\n', trajVmean, trajVvar);
 
 end

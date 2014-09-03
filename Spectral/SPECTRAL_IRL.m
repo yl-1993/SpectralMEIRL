@@ -8,12 +8,13 @@ nTrajs = size(trajs, 1);
 sol.weight   = [];
 
 TF = calBuildTF(trajs, mdp);
+%[TF.featExp,W] = whiten(TF.featExp)
 trajInfo = calSVD(TF.featExp);
 %wL = trajInfo.v(1,:)'
 
 %TODO: cluster using TF*v
 %TF.featExp*trajInfo.v
-[sol.belongTo, nClusters] = calCluster(trajInfo.u,0.08);
+[sol.belongTo, nClusters] = calCluster(trajInfo.u,0.1);
 %[sol.belongTo, nClusters] = calCluster(TF.featExp*trajInfo.v,0.08);
 sol.nClusters = nClusters;
 % 
@@ -30,24 +31,38 @@ sol.nClusters = nClusters;
 mFeatExp = calMergeFeatExp(TF.featExp,sol.belongTo, nClusters);
 sol.mFeatExp = mFeatExp;
 % prior matrix
-priorMatrix = eye(nClusters);
-p1 = 0.8;
-p2 = (1-p1)/(nClusters-1);
-for i = 1:nClusters
-    for j = 1:nClusters
-        if i == j
-            priorMatrix(i,j) = p1;
-        else
-            priorMatrix(i,j) = p2;
-        end
-    end
-end
+% priorMatrix = eye(nClusters);
+% p1 = 0.75;
+% p2 = (1-p1)/(nClusters-1);
+% for i = 1:nClusters
+%     for j = 1:nClusters
+%         if i == j
+%             priorMatrix(i,j) = p1;
+%         else
+%             priorMatrix(i,j) = p2;
+%         end
+%     end
+% end
+priorMatrix = calPriorOfClusters(mFeatExp, nClusters);
 %priorMatrix = [0.8 0.1 0.1; 0.1 0.8 0.1; 0.1 0.1 0.8];
 %trajRewawrd = priorMatrix*pinv(mFeatExp)';
-trajRewawrd = priorMatrix*pinv(priorMatrix*mFeatExp)';
+
+trajRewawrd = priorMatrix*pinv(mFeatExp)';
 for m = 1:nClusters
     wL = trajRewawrd(m,:)';
     sol.weight = cat(2, sol.weight, wL);
 end
 
+end
+
+function priorMatrix = calPriorOfClusters(mFeatExp, nClusters)
+    priorMatrix = eye(nClusters);
+    for i = 1:nClusters
+        for j = 1:nClusters
+            priorMatrix(j,i) = getVecDistance(mFeatExp(i,:),mFeatExp(j,:));
+        end
+    end
+    for i = 1:nClusters
+        priorMatrix(:,i) = priorMatrix(:,i)/sum(priorMatrix(:,i));
+    end
 end

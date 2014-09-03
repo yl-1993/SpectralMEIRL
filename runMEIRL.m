@@ -5,13 +5,13 @@ clear all;
 LASTN = maxNumCompThreads(1);
 
 probName = 'gridworld';
-probName = 'highway3';
+%probName = 'highway3';
 
 alg.name    = 'Ind_BIRL';
 alg.llhType   = 'BIRL';
 alg.priorType = 'Uniform';
 
-%alg.name    = 'EM_IRL';
+alg.name    = 'EM_IRL';
 alg.nClust  = 1;
 alg.llhType   = 'MLIRL';
 alg.priorType = 'Uniform';
@@ -21,7 +21,7 @@ alg.priorType = 'Uniform';
 % alg.priorType = 'NG';
 alg.priorType = 'Uniform';
 
-%alg.name = 'SPECTRAL_IRL';
+alg.name = 'SPECTRAL_IRL';
 
 configPath(alg.name, true);
 problem = problemParamsME(probName);
@@ -36,7 +36,7 @@ fprintf('%s\n', getAlgName(alg));
 fprintf('%s\n', getProblemName(problem));
 fprintf('****************************************\n');
 
-hst1 = testMEIRL(problem, irlOpts);
+hst1 = testMEIRL(problem, irlOpts, 1);
 
 % alg2{1} = alg;
 % data = getResults(hst1);

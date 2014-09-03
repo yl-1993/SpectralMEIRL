@@ -36,6 +36,7 @@ TF.pi  = piL;                         % empirical estimate of policy
 TF.mu  = mu;                          % state visitation
 TF.occ = occ;                         % discounted state-action frequency
 TF.featExp = featExp;
+TF.stdFeatExp = mdp.F'*TF.occ(:);  % feature expectation
 %trajInfo.featExp = mdp.F'*trajInfo.occ(:);  % feature expectation
 
 N = nnz(cnt);

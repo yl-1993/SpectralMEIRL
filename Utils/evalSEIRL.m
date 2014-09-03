@@ -22,5 +22,5 @@ end
 results.rewardDiff = norm(wE - wL);
 results.policyDiff = sum(d)/mdp.nStates;
 results.valueDiff  = vE - vL;
-vE
-vL
+
+

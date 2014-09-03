@@ -9,6 +9,7 @@ function [mFeatExp] = calMergeFeatExp(trajFeature, belongTo, nClusters)
                 mFeatExp(i,:) = mFeatExp(i,:) + trajFeature(j,:);
             end
         end
-        mFeatExp(i) = mFeatExp(i)/nnz(mergeArr);
+        mFeatExp(i) = mFeatExp(i)/nnz(mergeArr); % works better without
+        %doing such normalization
     end
 end

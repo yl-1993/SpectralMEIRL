@@ -156,7 +156,7 @@ if nargin >= 2 && bprint
     featOcc = full(H'*mdp.start);
     
     seed = 1;    
-    RandStream.setDefaultStream(RandStream.create('mrg32k3a', ...
+    RandStream.setGlobalStream(RandStream.create('mrg32k3a', ...
         'NumStreams', 1, 'Seed', seed));
     fprintf('sample trajectory\n');
     nTrajs = 1;

@@ -1,11 +1,11 @@
 function problem = problemParamsME(name)
 
 problem.name      = name;
-problem.iters     = 1:1;
+problem.iters     = 1:10;
 problem.discount  = 0.9;
 problem.nExps     = length(problem.iters);
 problem.nExperts  = 3;    % # of experts
-problem.nTrajs    = 4;    % # of trajectories
+problem.nTrajs    = 6;    % # of trajectories
 problem.nSteps    = 60;   % # of steps in each trajectory
 problem.initSeed  = 1;    % initial random seed
 
