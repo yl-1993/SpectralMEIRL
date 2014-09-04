@@ -12,15 +12,14 @@ trajInfo.v = v;
 
 if nargin >= 2 && (energyRate > 0 && energyRate < 1)
     % get index of singular value
-    k = getIndexOfLargeEnerge(singular,energyRate);
-    trajInfo.featExp = u(:,1:k)*singular(1:k,1:k)*v(:,1:k)';
+    trajInfo.featExp = u(:,1:k)*s(1:k,1:k)*v(:,1:k)';
 else
     trajInfo.featExp = featExp;
 end
 
 end %end_of_calSVD
 
-function index = getIndexOfLargeEnerge(singular,energyRate)
+function index = keepLarge
     % keep the energyRate percet energy
     index = 1;
     threshold = sum(sum(singular))*energyRate;

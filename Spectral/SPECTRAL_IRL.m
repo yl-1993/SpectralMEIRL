@@ -9,7 +9,7 @@ sol.weight   = [];
 
 TF = calBuildTF(trajs, mdp);
 %[TF.featExp,W] = whiten(TF.featExp)
-trajInfo = calSVD(TF.featExp);
+trajInfo = calSVD(TF.featExp,1);
 %wL = trajInfo.v(1,:)'
 
 %TODO: cluster using TF*v
@@ -17,7 +17,8 @@ trajInfo = calSVD(TF.featExp);
 [sol.belongTo, nClusters] = calCluster(trajInfo.u,0.1);
 %[sol.belongTo, nClusters] = calCluster(TF.featExp*trajInfo.v,0.08);
 sol.nClusters = nClusters;
-% 
+
+% the following code give the right clusters
 % nClusters = 3;
 % clusterId  =[];
 % trajNum = nTrajs/nClusters;
@@ -27,8 +28,11 @@ sol.nClusters = nClusters;
 % sol.belongTo = clusterId;
 %
 
-% reward function for each cluster
-mFeatExp = calMergeFeatExp(TF.featExp,sol.belongTo, nClusters);
+% merge feature expectation info
+mFeatExp = calMergeFeatExp(trajInfo.featExp,sol.belongTo, nClusters);
+% only use main energy of mFeatExp to estimate reward
+% tmp = calSVD(mFeatExp,0.9);
+% mFeatExp = tmp.featExp;
 sol.mFeatExp = mFeatExp;
 % prior matrix
 % priorMatrix = eye(nClusters);
