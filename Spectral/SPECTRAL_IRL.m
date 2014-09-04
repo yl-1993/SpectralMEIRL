@@ -51,22 +51,10 @@ priorMatrix = calPriorOfClusters(mFeatExp, nClusters);
 %priorMatrix = [0.8 0.1 0.1; 0.1 0.8 0.1; 0.1 0.1 0.8];
 %trajRewawrd = priorMatrix*pinv(mFeatExp)';
 
-trajRewawrd = priorMatrix*pinv(mFeatExp)';
+trajRewawrd = calTrajReward(priorMatrix, mFeatExp);
 for m = 1:nClusters
     wL = trajRewawrd(m,:)';
     sol.weight = cat(2, sol.weight, wL);
 end
 
-end
-
-function priorMatrix = calPriorOfClusters(mFeatExp, nClusters)
-    priorMatrix = eye(nClusters);
-    for i = 1:nClusters
-        for j = 1:nClusters
-            priorMatrix(j,i) = getVecDistance(mFeatExp(i,:),mFeatExp(j,:));
-        end
-    end
-    for i = 1:nClusters
-        priorMatrix(:,i) = priorMatrix(:,i)/sum(priorMatrix(:,i));
-    end
 end

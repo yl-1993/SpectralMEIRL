@@ -18,11 +18,11 @@ function [flag] = isEmpty(belongTo)
             return;
         end
     end
-    flag = 0
+    flag = 0;
 end
 
 function [belongTo] = getClusterFromCol(TR, belongTo, nClust, rate)
-    col = TR(:,nClust)
+    col = TR(:,nClust);
     len = size(col);
     dist.data = zeros(1,len);
     % remove the clustered point
@@ -72,7 +72,7 @@ function [belongTo] = getClusterFromCol(TR, belongTo, nClust, rate)
         % sort by ascent
         dist= qSort(dist);
         % percentage of all energy
-        dist_sum = dist_sum*rate
+        dist_sum = dist_sum*rate;
         tmp_sum = 0;
         k = 1;
         % get a small part of whole energe (e.g rate = 5%)
@@ -83,7 +83,6 @@ function [belongTo] = getClusterFromCol(TR, belongTo, nClust, rate)
                 break;
             end
         end
-        tmp_sum
         % break out at k, so the first k-1 belong to the same cluster
         for j = 1:k-1
             index = dist.index(j);
