@@ -133,7 +133,7 @@ elseif strcmp(name, 'highway3')
         w(end) = 0.1;       % high-speed
     end
     
-elseif strcmp(name, 'gridworld')
+elseif strcmp(name, 'gridworld2')
     l = randperm(nF);
     k = ceil(0.3*nF);
     idx = l(1:k);
@@ -145,8 +145,9 @@ elseif strcmp(name, 'gridworld')
 %     w(idx) = rand(k, 1) - 1;
 %     w(end) = 1;
     
-elseif strcmp(name, 'gridworld2')
-    w = -rand(nF, 1);
+elseif strcmp(name, 'gridworld')
+    %w = -rand(nF, 1);
+    w = rand(nF, 1);
     
 end
 

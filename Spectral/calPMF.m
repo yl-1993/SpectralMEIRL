@@ -1,23 +1,23 @@
 function [w1_P1, w1_M1] = calPMF(train_matrix)
 
-  epsilon=0.2; % Learning rate 
-  lambda  = 0.5; % Regularization parameter 
+  epsilon=5/1000*18; % Learning rate 
+  lambda  = 10; % Regularization parameter 
   momentum=0.8; 
 
   epoch=1; 
   maxepoch=50; 
 
+  numbatches= 2; % Number of batches  
+  num_m = size(train_matrix,2);  % Number of features
+  num_p = size(train_matrix,1);  % Number of clusters
+  num_feat = num_m;           % Number of reward weights is the same as number of features 
+  
   % convert matrix to vector
   train_vec = convertM2V(train_matrix);
 
   mean_rating = mean(train_vec(:,3)); 
 
   pairs_tr = length(train_vec); % training data 
-
-  numbatches= 2; % Number of batches  
-  num_m = size(train_matrix,2);  % Number of features
-  num_p = size(train_matrix,1);  % Number of clusters
-  num_feat = num_m;           % Number of reward weights is the same as number of features 
 
   w1_M1     = 0.1*randn(num_m, num_feat); % Movie feature vectors
   w1_P1     = 0.1*randn(num_p, num_feat); % User feature vecators
@@ -33,7 +33,7 @@ function [w1_P1, w1_M1] = calPMF(train_matrix)
 
       N=pairs_tr/numbatches; % number training triplets per batch (= totalNumber/batchNumber)
       for batch = 1:numbatches
-        fprintf(1,'epoch %d batch %d \r',epoch,batch);
+        %fprintf(1,'epoch %d batch %d \r',epoch,batch);
        
         aa_p   = double(train_vec((batch-1)*N+1:batch*N,1));
         aa_m   = double(train_vec((batch-1)*N+1:batch*N,2));

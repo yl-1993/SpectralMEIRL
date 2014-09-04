@@ -1,7 +1,7 @@
 function problem = problemParamsME(name)
 
 problem.name      = name;
-problem.iters     = 1:10;
+problem.iters     = 1:1;
 problem.discount  = 0.9;
 problem.nExps     = length(problem.iters);
 problem.nExperts  = 3;    % # of experts

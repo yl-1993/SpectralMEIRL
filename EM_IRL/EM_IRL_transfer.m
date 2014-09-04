@@ -10,7 +10,7 @@ for k = 1:nrCl
     if sol.rho(k) > 0
         w = sol.weight(:, k);
         llh = calLogLLH(w, trajInfo, [], [], [], mdp, opts);        
-        dist(k) = sol.rho(k)*exp(llh)
+        dist(k) = sol.rho(k)*exp(llh);
     end
 end
-wL = sol.weight*(dist./sum(dist))
+wL = sol.weight*(dist./sum(dist));
