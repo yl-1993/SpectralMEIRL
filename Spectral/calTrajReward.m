@@ -30,3 +30,16 @@ function trajReward = normMatrix(trajReward, option)
         trajReward = trajReward;
     end
 end
+
+function trajReward = softmax(trajReward)
+    % reduce the value difference among reward weights
+    % do softmax for each cluster reward weights
+    [nr,nc] = size(trajReward);
+    for i = 1:nr
+        maxe = max(trajReward(i,:));
+        for j = 1:nc
+            trajReward(i,j) = exp(trajReward(i,j) - maxe);
+        end
+        trajReward(i,:) = trajReward(i,:)/sum(trajReward(i,:));
+    end
+end
