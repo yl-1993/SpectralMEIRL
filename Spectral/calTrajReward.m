@@ -1,17 +1,23 @@
 function trajReward = calTrajReward(priorMatrix, mFeatExp)
     % normalize the mFeatMatrix
-    mFeatExp = normMatrix(mFeatExp,'row')
+    mFeatExp = normMatrix(mFeatExp,'row');
     % try to maximize the direction of each reward
-    trajReward = priorMatrix*pinv(mFeatExp)'
+    trajReward = priorMatrix*pinv(mFeatExp)';
     % Probabilistic Matrix Factorization
     %mFeatExp = pinv(mFeatExp)';
     %[u, s, v] = svd(mFeatExp);
     %trajReward = v(1:size(mFeatExp,1),:);
     %trajReward = v(:,1:size(mFeatExp,1))';
-    %[trajReward, rewardFeature] = calPMF(trajReward);
+    %[trajReward, rewardFeature] = calPMF(mFeatExp);
     %trajReward = trajReward*rewardFeature;
     %trajReward = pinv(trajReward)';
+    %trajReward = softmax(trajReward);
+    trajInfo = calSVD(trajReward, 0.85);
+    trajReward = trajInfo.featExp;
+    
     trajReward = normMatrix(trajReward,'row')
+    %trajReward = softmax(trajReward);
+
 end
 
 function trajReward = normMatrix(trajReward, option)

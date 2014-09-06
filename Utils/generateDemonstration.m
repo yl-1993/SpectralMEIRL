@@ -147,7 +147,7 @@ elseif strcmp(name, 'gridworld2')
     
 elseif strcmp(name, 'gridworld')
     %w = -rand(nF, 1);
-    w = 2*rand(nF, 1) - 1;
+    w = rand(nF, 1);
     
 end
 
